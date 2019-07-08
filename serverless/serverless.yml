@@ -1,0 +1,59 @@
+service: vapes 
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dotenv-plugin
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-east-2
+  timeout: 300
+  environment:
+    AZURE_KEY: ${env:AZURE_KEY}
+    S3_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-images
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource:
+        - 'arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*'
+functions:
+  importCelebs:
+    handler: import.import
+    events:
+      - schedule:
+          name: wwv-celeb-import
+          description: Imports celebrities once a day from CelebBucks
+          rate: rate(1 day)
+          enabled: true
+  graphql:
+    handler: graphql.handler
+    events:
+      - http:
+          method: any
+          path: api
+          cors: true
+resources:
+   Resources:
+    ImageBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:provider.environment.S3_BUCKET}
+        AccessControl: PublicRead
+        CorsConfiguration:
+          CorsRules:
+            -
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+package:
+  include:
+    - types.ts

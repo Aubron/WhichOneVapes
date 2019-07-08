@@ -1,0 +1,12 @@
+endpoint: http://prism-publi-1wyi1sg1s1owz-697848804.us-east-2.elb.amazonaws.com/vapes
+datamodel: datamodel.prisma
+secret: ${env:PRISMA_SECRET}
+generate:
+  - generator: typescript-client
+    output: ../serverless/generated/prisma-client
+  - generator: graphql-schema
+    output: ../serverless/generated/prisma.graphql
+hooks:
+  post-deploy:
+    - prisma generate
+    - npx nexus-prisma-generate --client ../serverless/generated/prisma-client --output ../serverless/generated/nexus-prisma

@@ -1,0 +1,559 @@
+type AggregateCelebrity {
+  count: Int!
+}
+
+type AggregateIP {
+  count: Int!
+}
+
+type AggregateMatch {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Celebrity {
+  id: ID!
+  internalId: ID!
+  name: String!
+  elo: Int!
+  disabled: Boolean!
+  totalMatches: Int!
+  unknownCount: Int!
+  image: String
+  imageSource: String
+}
+
+type CelebrityConnection {
+  pageInfo: PageInfo!
+  edges: [CelebrityEdge]!
+  aggregate: AggregateCelebrity!
+}
+
+input CelebrityCreateInput {
+  id: ID
+  internalId: ID!
+  name: String!
+  elo: Int
+  disabled: Boolean
+  totalMatches: Int
+  unknownCount: Int
+  image: String
+  imageSource: String
+}
+
+input CelebrityCreateOneInput {
+  create: CelebrityCreateInput
+  connect: CelebrityWhereUniqueInput
+}
+
+type CelebrityEdge {
+  node: Celebrity!
+  cursor: String!
+}
+
+enum CelebrityOrderByInput {
+  id_ASC
+  id_DESC
+  internalId_ASC
+  internalId_DESC
+  name_ASC
+  name_DESC
+  elo_ASC
+  elo_DESC
+  disabled_ASC
+  disabled_DESC
+  totalMatches_ASC
+  totalMatches_DESC
+  unknownCount_ASC
+  unknownCount_DESC
+  image_ASC
+  image_DESC
+  imageSource_ASC
+  imageSource_DESC
+}
+
+type CelebrityPreviousValues {
+  id: ID!
+  internalId: ID!
+  name: String!
+  elo: Int!
+  disabled: Boolean!
+  totalMatches: Int!
+  unknownCount: Int!
+  image: String
+  imageSource: String
+}
+
+type CelebritySubscriptionPayload {
+  mutation: MutationType!
+  node: Celebrity
+  updatedFields: [String!]
+  previousValues: CelebrityPreviousValues
+}
+
+input CelebritySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CelebrityWhereInput
+  AND: [CelebritySubscriptionWhereInput!]
+  OR: [CelebritySubscriptionWhereInput!]
+  NOT: [CelebritySubscriptionWhereInput!]
+}
+
+input CelebrityUpdateDataInput {
+  internalId: ID
+  name: String
+  elo: Int
+  disabled: Boolean
+  totalMatches: Int
+  unknownCount: Int
+  image: String
+  imageSource: String
+}
+
+input CelebrityUpdateInput {
+  internalId: ID
+  name: String
+  elo: Int
+  disabled: Boolean
+  totalMatches: Int
+  unknownCount: Int
+  image: String
+  imageSource: String
+}
+
+input CelebrityUpdateManyMutationInput {
+  internalId: ID
+  name: String
+  elo: Int
+  disabled: Boolean
+  totalMatches: Int
+  unknownCount: Int
+  image: String
+  imageSource: String
+}
+
+input CelebrityUpdateOneRequiredInput {
+  create: CelebrityCreateInput
+  update: CelebrityUpdateDataInput
+  upsert: CelebrityUpsertNestedInput
+  connect: CelebrityWhereUniqueInput
+}
+
+input CelebrityUpsertNestedInput {
+  update: CelebrityUpdateDataInput!
+  create: CelebrityCreateInput!
+}
+
+input CelebrityWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  internalId: ID
+  internalId_not: ID
+  internalId_in: [ID!]
+  internalId_not_in: [ID!]
+  internalId_lt: ID
+  internalId_lte: ID
+  internalId_gt: ID
+  internalId_gte: ID
+  internalId_contains: ID
+  internalId_not_contains: ID
+  internalId_starts_with: ID
+  internalId_not_starts_with: ID
+  internalId_ends_with: ID
+  internalId_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  elo: Int
+  elo_not: Int
+  elo_in: [Int!]
+  elo_not_in: [Int!]
+  elo_lt: Int
+  elo_lte: Int
+  elo_gt: Int
+  elo_gte: Int
+  disabled: Boolean
+  disabled_not: Boolean
+  totalMatches: Int
+  totalMatches_not: Int
+  totalMatches_in: [Int!]
+  totalMatches_not_in: [Int!]
+  totalMatches_lt: Int
+  totalMatches_lte: Int
+  totalMatches_gt: Int
+  totalMatches_gte: Int
+  unknownCount: Int
+  unknownCount_not: Int
+  unknownCount_in: [Int!]
+  unknownCount_not_in: [Int!]
+  unknownCount_lt: Int
+  unknownCount_lte: Int
+  unknownCount_gt: Int
+  unknownCount_gte: Int
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  imageSource: String
+  imageSource_not: String
+  imageSource_in: [String!]
+  imageSource_not_in: [String!]
+  imageSource_lt: String
+  imageSource_lte: String
+  imageSource_gt: String
+  imageSource_gte: String
+  imageSource_contains: String
+  imageSource_not_contains: String
+  imageSource_starts_with: String
+  imageSource_not_starts_with: String
+  imageSource_ends_with: String
+  imageSource_not_ends_with: String
+  AND: [CelebrityWhereInput!]
+  OR: [CelebrityWhereInput!]
+  NOT: [CelebrityWhereInput!]
+}
+
+input CelebrityWhereUniqueInput {
+  id: ID
+  internalId: ID
+}
+
+type IP {
+  id: ID!
+  ip: String!
+  votes: Int!
+}
+
+type IPConnection {
+  pageInfo: PageInfo!
+  edges: [IPEdge]!
+  aggregate: AggregateIP!
+}
+
+input IPCreateInput {
+  id: ID
+  ip: String!
+  votes: Int
+}
+
+type IPEdge {
+  node: IP!
+  cursor: String!
+}
+
+enum IPOrderByInput {
+  id_ASC
+  id_DESC
+  ip_ASC
+  ip_DESC
+  votes_ASC
+  votes_DESC
+}
+
+type IPPreviousValues {
+  id: ID!
+  ip: String!
+  votes: Int!
+}
+
+type IPSubscriptionPayload {
+  mutation: MutationType!
+  node: IP
+  updatedFields: [String!]
+  previousValues: IPPreviousValues
+}
+
+input IPSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: IPWhereInput
+  AND: [IPSubscriptionWhereInput!]
+  OR: [IPSubscriptionWhereInput!]
+  NOT: [IPSubscriptionWhereInput!]
+}
+
+input IPUpdateInput {
+  ip: String
+  votes: Int
+}
+
+input IPUpdateManyMutationInput {
+  ip: String
+  votes: Int
+}
+
+input IPWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  ip: String
+  ip_not: String
+  ip_in: [String!]
+  ip_not_in: [String!]
+  ip_lt: String
+  ip_lte: String
+  ip_gt: String
+  ip_gte: String
+  ip_contains: String
+  ip_not_contains: String
+  ip_starts_with: String
+  ip_not_starts_with: String
+  ip_ends_with: String
+  ip_not_ends_with: String
+  votes: Int
+  votes_not: Int
+  votes_in: [Int!]
+  votes_not_in: [Int!]
+  votes_lt: Int
+  votes_lte: Int
+  votes_gt: Int
+  votes_gte: Int
+  AND: [IPWhereInput!]
+  OR: [IPWhereInput!]
+  NOT: [IPWhereInput!]
+}
+
+input IPWhereUniqueInput {
+  id: ID
+  ip: String
+}
+
+scalar Long
+
+type Match {
+  id: ID!
+  ip: String!
+  celebOne: Celebrity!
+  celebTwo: Celebrity!
+  expected: Int!
+  complete: Boolean!
+}
+
+type MatchConnection {
+  pageInfo: PageInfo!
+  edges: [MatchEdge]!
+  aggregate: AggregateMatch!
+}
+
+input MatchCreateInput {
+  id: ID
+  ip: String!
+  celebOne: CelebrityCreateOneInput!
+  celebTwo: CelebrityCreateOneInput!
+  expected: Int!
+  complete: Boolean!
+}
+
+type MatchEdge {
+  node: Match!
+  cursor: String!
+}
+
+enum MatchOrderByInput {
+  id_ASC
+  id_DESC
+  ip_ASC
+  ip_DESC
+  expected_ASC
+  expected_DESC
+  complete_ASC
+  complete_DESC
+}
+
+type MatchPreviousValues {
+  id: ID!
+  ip: String!
+  expected: Int!
+  complete: Boolean!
+}
+
+type MatchSubscriptionPayload {
+  mutation: MutationType!
+  node: Match
+  updatedFields: [String!]
+  previousValues: MatchPreviousValues
+}
+
+input MatchSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MatchWhereInput
+  AND: [MatchSubscriptionWhereInput!]
+  OR: [MatchSubscriptionWhereInput!]
+  NOT: [MatchSubscriptionWhereInput!]
+}
+
+input MatchUpdateInput {
+  ip: String
+  celebOne: CelebrityUpdateOneRequiredInput
+  celebTwo: CelebrityUpdateOneRequiredInput
+  expected: Int
+  complete: Boolean
+}
+
+input MatchUpdateManyMutationInput {
+  ip: String
+  expected: Int
+  complete: Boolean
+}
+
+input MatchWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  ip: String
+  ip_not: String
+  ip_in: [String!]
+  ip_not_in: [String!]
+  ip_lt: String
+  ip_lte: String
+  ip_gt: String
+  ip_gte: String
+  ip_contains: String
+  ip_not_contains: String
+  ip_starts_with: String
+  ip_not_starts_with: String
+  ip_ends_with: String
+  ip_not_ends_with: String
+  celebOne: CelebrityWhereInput
+  celebTwo: CelebrityWhereInput
+  expected: Int
+  expected_not: Int
+  expected_in: [Int!]
+  expected_not_in: [Int!]
+  expected_lt: Int
+  expected_lte: Int
+  expected_gt: Int
+  expected_gte: Int
+  complete: Boolean
+  complete_not: Boolean
+  AND: [MatchWhereInput!]
+  OR: [MatchWhereInput!]
+  NOT: [MatchWhereInput!]
+}
+
+input MatchWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createCelebrity(data: CelebrityCreateInput!): Celebrity!
+  updateCelebrity(data: CelebrityUpdateInput!, where: CelebrityWhereUniqueInput!): Celebrity
+  updateManyCelebrities(data: CelebrityUpdateManyMutationInput!, where: CelebrityWhereInput): BatchPayload!
+  upsertCelebrity(where: CelebrityWhereUniqueInput!, create: CelebrityCreateInput!, update: CelebrityUpdateInput!): Celebrity!
+  deleteCelebrity(where: CelebrityWhereUniqueInput!): Celebrity
+  deleteManyCelebrities(where: CelebrityWhereInput): BatchPayload!
+  createIP(data: IPCreateInput!): IP!
+  updateIP(data: IPUpdateInput!, where: IPWhereUniqueInput!): IP
+  updateManyIPs(data: IPUpdateManyMutationInput!, where: IPWhereInput): BatchPayload!
+  upsertIP(where: IPWhereUniqueInput!, create: IPCreateInput!, update: IPUpdateInput!): IP!
+  deleteIP(where: IPWhereUniqueInput!): IP
+  deleteManyIPs(where: IPWhereInput): BatchPayload!
+  createMatch(data: MatchCreateInput!): Match!
+  updateMatch(data: MatchUpdateInput!, where: MatchWhereUniqueInput!): Match
+  updateManyMatches(data: MatchUpdateManyMutationInput!, where: MatchWhereInput): BatchPayload!
+  upsertMatch(where: MatchWhereUniqueInput!, create: MatchCreateInput!, update: MatchUpdateInput!): Match!
+  deleteMatch(where: MatchWhereUniqueInput!): Match
+  deleteManyMatches(where: MatchWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  celebrity(where: CelebrityWhereUniqueInput!): Celebrity
+  celebrities(where: CelebrityWhereInput, orderBy: CelebrityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Celebrity]!
+  celebritiesConnection(where: CelebrityWhereInput, orderBy: CelebrityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CelebrityConnection!
+  iP(where: IPWhereUniqueInput!): IP
+  iPs(where: IPWhereInput, orderBy: IPOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [IP]!
+  iPsConnection(where: IPWhereInput, orderBy: IPOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IPConnection!
+  match(where: MatchWhereUniqueInput!): Match
+  matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match]!
+  matchesConnection(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MatchConnection!
+  node(id: ID!): Node
+}
+
+type Subscription {
+  celebrity(where: CelebritySubscriptionWhereInput): CelebritySubscriptionPayload
+  iP(where: IPSubscriptionWhereInput): IPSubscriptionPayload
+  match(where: MatchSubscriptionWhereInput): MatchSubscriptionPayload
+}

@@ -1,0 +1,26 @@
+type Celebrity {
+  id: ID! @id
+  internalId: ID! @unique
+  name: String!
+  elo: Int! @default(value: 1500)
+  disabled: Boolean! @default(value: false)
+  totalMatches: Int! @default(value: 0)
+  unknownCount: Int! @default(value: 0)
+  image: String
+  imageSource: String
+}
+
+type IP {
+  id: ID! @id
+  ip: String! @unique
+  votes: Int! @default(value: 0)
+}
+
+type Match {
+  id: ID! @id
+  ip: String!
+  celebOne: Celebrity! @relation(name: "CelebOneOnCelebrity"),
+  celebTwo: Celebrity! @relation(name: "CelebTwoOnCelebrity"),
+  expected: Int!
+  complete: Boolean! @deafult(value: false)
+}
